@@ -12,7 +12,7 @@ node {
      }
 
      stage('Build image') {
-         app = docker.build("unknown9732/wing-music")
+         sh 'sudo docker build --build-arg JAR_FILE=build/libs/*.jar -t unknown9732/wing-music .'
      }
      stage('Push image') {
          docker.withRegistry('https://registry.hub.docker.com', 'unknown9732-docker') {
