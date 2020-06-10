@@ -4,7 +4,7 @@ node {
      }
 
      stage('Gradle Build') {
-         sh './gradlew bootjar'
+         sh 'sudo ./gradlew bootjar'
      }
 
      stage('Build image') {
