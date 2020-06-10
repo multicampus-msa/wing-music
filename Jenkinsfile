@@ -4,9 +4,7 @@ node {
      }
 
      stage('Gradle Build') {
-       steps {
          sh './gradlew bootjar'
-       }
      }
 
      stage('Build image') {
