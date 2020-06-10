@@ -5,9 +5,12 @@ import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import wingmusic.service.MusicService;
+import wingmusic.service.UserService;
 import wingmusic.web.dto.music.MusicResponseDto;
 import wingmusic.web.dto.music.MusicSaveRequestDto;
 import wingmusic.web.dto.music.MusicUpdateRequestDto;
+import wingmusic.web.dto.user.UserLikedMusicRequestDto;
+import wingmusic.web.dto.user.UserLikedMusicResponseDto;
 
 import java.util.Set;
 
@@ -17,6 +20,8 @@ import java.util.Set;
 @AllArgsConstructor
 @CrossOrigin
 public class MusicController {
+
+    private final UserService userService;
 
     private final MusicService musicService;
 
@@ -54,5 +59,24 @@ public class MusicController {
     @GetMapping("/api/music/genre={genre}")
     private Set<MusicResponseDto> findByGenre(@PathVariable("genre") String genre) {
         return musicService.findByGenre(genre);
+    }
+
+
+    @ApiOperation(value = "유저 음악 좋아요")
+    @PostMapping("/liked")
+    public Long userLikedMusicSave(@RequestBody UserLikedMusicRequestDto requestDto){
+        return userService.likedMusic(requestDto);
+    }
+
+    @ApiOperation(value = "유저 음악 좋아요 취소")
+    @DeleteMapping("/liked")
+    public Long userLikedMusicDelete(@RequestBody UserLikedMusicRequestDto requestDto){
+        return userService.likedMusicDelete(requestDto);
+    }
+
+    @ApiOperation(value = "유저 음악 좋아요 목록")
+    @GetMapping("/liked/{id}")
+    public UserLikedMusicResponseDto userLikedMusicSave(@PathVariable("id") String userId){
+        return userService.likedMusicSet(userId);
     }
 }
