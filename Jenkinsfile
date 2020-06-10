@@ -3,8 +3,12 @@ node {
          checkout scm
      }
 
+     stage('chmod') {
+         sh 'chmod +x gradlew'
+     }
+
      stage('Gradle Build') {
-         sh 'sudo ./gradlew bootjar'
+         sh './gradlew bootjar'
      }
 
      stage('Build image') {
