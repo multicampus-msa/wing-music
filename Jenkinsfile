@@ -13,7 +13,7 @@ node {
 
      stage('Build & Push image') {
          docker.withRegistry('https://registry.hub.docker.com', 'unknown9732-docker') {
-             def image = docker.build("unknown9732/wing-music:latest", "--build-arg JAR_FILE=build/libs/*.jar")
+             def image = docker.build("unknown9732/wing-music:latest", "--build-arg JAR_FILE=build/libs/*.jar", "-f ${dockerfile} .")
              image.push()
          }
      }
