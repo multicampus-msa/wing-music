@@ -11,13 +11,10 @@ node {
          sh './gradlew bootjar'
      }
 
-     stage('Build image') {
-         sh 'sudo docker build --build-arg JAR_FILE=build/libs/*.jar -t unknown9732/wing-music .'
-     }
-
-     stage('Push image') {
+     stage('Build & Push image') {
          docker.withRegistry('https://registry.hub.docker.com', 'unknown9732-docker') {
-             sh 'sudo docker push unknown9732/wing-music'
+             def image = docker.build("unknown9732/wing-music:latest", "--build-arg JAR_FILE=build/libs/*.jar")
+             image.push()
          }
      }
 
