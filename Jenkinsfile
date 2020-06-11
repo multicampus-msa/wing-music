@@ -13,10 +13,10 @@ node {
      }
 
      stage('Build & Push image') {
-         docker.withRegistry('https://registry.hub.docker.com', 'unknown9732-docker') {
-             def image = docker.build("unknown9732/wing-music:latest")
+          docker.withRegistry('https://registry.hub.docker.com', 'unknown9732-docker') {
              sh 'ls'
              sh 'pwd'
+             def image = docker.build("unknown9732/wing-music:latest")
              image.push()
              sh 'sudo docker service update --image unknown9732/wing-music wing-music'
          }
