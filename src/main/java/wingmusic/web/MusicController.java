@@ -75,7 +75,7 @@ public class MusicController {
     }
 
     @ApiOperation(value = "유저 음악 좋아요 목록")
-    @GetMapping("/music/liked/{id}")
+    @GetMapping("/api/music/liked/{id}")
     public UserLikedMusicResponseDto userLikedMusicSave(@PathVariable("id") String userId){
         return userService.likedMusicSet(userId);
     }
