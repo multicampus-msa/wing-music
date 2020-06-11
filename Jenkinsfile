@@ -9,12 +9,12 @@ node {
 
      stage('Gradle Build') {
          sh './gradlew bootjar'
+         sh 'cp /build/libs/*.jar ./'
      }
 
      stage('Build & Push image') {
          docker.withRegistry('https://registry.hub.docker.com', 'unknown9732-docker') {
-             def Dockerfile = "Dockerfile"
-             def image = docker.build("unknown9732/wing-music:latest", "--build-arg JAR_FILE=build/libs/*.jar", "-f ${Dockerfile} ./")
+             def image = docker.build("unknown9732/wing-music:latest")
              image.push()
          }
      }
