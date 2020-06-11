@@ -9,16 +9,14 @@ node {
 
      stage('Gradle Build') {
          sh './gradlew bootjar'
-         sh 'cp /var/lib/jenkins/workspace/wing-music/build/libs/*.jar ./'
+         sh 'cp /var/lib/jenkins/workspace/wing-user/build/libs/*.jar ./'
      }
 
      stage('Build & Push image') {
-          docker.withRegistry('https://registry.hub.docker.com', 'unknown9732-docker') {
-             sh 'ls'
-             sh 'pwd'
-             def image = docker.build("unknown9732/wing-music:latest")
+          docker.withRegistry('https://registry.hub.docker.com', 'midaslmg94-docker') {
+             def image = docker.build("midaslmg94/wing-user:latest")
              image.push()
-             sh 'sudo docker service update --image unknown9732/wing-music wing-music'
+             sh 'sudo docker service update --image midaslmg94/wing-user wing-user'
          }
      }
  }

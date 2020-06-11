@@ -63,19 +63,19 @@ public class MusicController {
 
 
     @ApiOperation(value = "유저 음악 좋아요")
-    @PostMapping("/liked")
+    @PostMapping("/api/music/liked")
     public Long userLikedMusicSave(@RequestBody UserLikedMusicRequestDto requestDto){
         return userService.likedMusic(requestDto);
     }
 
     @ApiOperation(value = "유저 음악 좋아요 취소")
-    @DeleteMapping("/liked")
+    @DeleteMapping("/api/music/liked")
     public Long userLikedMusicDelete(@RequestBody UserLikedMusicRequestDto requestDto){
         return userService.likedMusicDelete(requestDto);
     }
 
     @ApiOperation(value = "유저 음악 좋아요 목록")
-    @GetMapping("/liked/{id}")
+    @GetMapping("/music/liked/{id}")
     public UserLikedMusicResponseDto userLikedMusicSave(@PathVariable("id") String userId){
         return userService.likedMusicSet(userId);
     }
