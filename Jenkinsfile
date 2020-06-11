@@ -9,7 +9,7 @@ node {
 
      stage('Gradle Build') {
          sh './gradlew bootjar'
-         sh 'cp /build/libs/*.jar ./'
+         sh 'cp /var/lib/jenkins/workspace/wing-music/build/libs/*.jar ./'
      }
 
      stage('Build & Push image') {
